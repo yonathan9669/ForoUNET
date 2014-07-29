@@ -6,21 +6,20 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-    
     <h:head>
         <title><h:outputText value="#{bundle.AppName}"></h:outputText></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
         <p:growl widgetVar="growl" life="3000" />
         <link type="image/x-icon" rel="shortcut icon" href="resources/images/favicon.ico"></link>
         <h:outputStylesheet library="css" name="index.css"/>
-
     </h:head>
+
     <h:body>
         <h:form>
             <p:graphicImage value="resources/images/background.jpg" style="z-index:-1; min-height: 100%; min-width: 1024px; width: 100%; height: auto;position: fixed; top: 0;  left: 0;" />
             <p:graphicImage value="resources/images/Shape5_University_logo.png" style="z-index:2; min-height: 20%; min-width: 394px; width: 20%; height: auto; min-height:85px; position: fixed; top: 10%;  left: 37%;" />
 
             <p:dialog header="Ingreso a ForoUnet" rendered="true" visible="true" resizable="false" closable="false" hideEffect="puff" showEffect="bounce">
-                
                 <h:panelGroup id="display" >
                     <p:panelGrid columns="2" >
                         <h:outputLabel for="input_username" value="Usuario"/>
@@ -35,9 +34,17 @@
                     </p:panelGrid>
                 </h:panelGroup>
 
-                <a style="padding: 0; position: relative; left: 25%;"
-                   href="https://intranet.unet.edu.ve/intranet2/modulos/usuario/contrasena2.php">¿Olvido su contraseña?</a>
+                <h:panelGroup id="extra" >
+                    <p:link outcome="accountManagement/forgotPassword" value="¿Olvido su contraseña?"
+                            style="position: relative; left: 0;">
+                        <f:param name="productId" value="#{loginBean.username}" />
+                    </p:link>
 
+                    <p:link outcome="index" value="Invitado"
+                            style="position: relative; right: 0;">
+                        <f:param name="role" value="0" />
+                    </p:link>
+                </h:panelGroup>
             </p:dialog>
         </h:form>
 
@@ -47,5 +54,25 @@
                 <a href="mailto:webmaster@unet.edu.ve" style=" color: #FFFFFF;">Contáctenos</a>
             </p>
         </div>
+
+        <p:dialog header="CRUD" rendered="true" visible="true" resizable="false" closable="true" hideEffect="puff" showEffect="puff">
+            <h:panelGroup id="extra" >
+                <br />
+                <h:link outcome="/Admin/message/List" value="Show All Message Items"/>
+                <br />
+                <h:link outcome="/Admin/publications/List" value="Show All Publications Items"/>
+                <br />
+                <h:link outcome="/Admin/subject/List" value="Show All Subject Items"/>
+                <br />
+                <h:link outcome="/Admin/type/List" value="Show All Type Items"/>
+                <br />
+                <h:link outcome="/Admin/user/List" value="Show All User Items"/>
+                <br />
+                <h:link outcome="/Admin/comment/List" value="Show All Comment Items"/>
+                <br />
+                <h:link outcome="/Admin/repository/List" value="Show All Repository Items"/>
+            </h:panelGroup>
+        </p:dialog>
+
     </h:body>
 </html>
